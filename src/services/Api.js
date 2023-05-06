@@ -1,10 +1,10 @@
 import React from "react";
-import {message} from "antd";
+import { message } from "antd";
 
 
 export default class Data {
 
-    api(path,method="GET",body=null){
+    api(path, method = "GET", body = null) {
 
         const url = "http://localhost:3456" + path;
 
@@ -22,14 +22,14 @@ export default class Data {
     }
 
 
-    async getMasini(){
+    async getMasini() {
         try {
             let data = await this.api('/masini')
 
-            if(data.status===200){
-                let resp=await data.json();
+            if (data.status === 200) {
+                let resp = await data.json();
                 return resp;
-            }else{
+            } else {
 
             }
 

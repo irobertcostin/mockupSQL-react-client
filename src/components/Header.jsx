@@ -1,8 +1,11 @@
 import { Button, Drawer, Radio, Space } from 'antd';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 
 
 export default function Header() {
+
+    const navigate = useNavigate();
 
 
     const [open, setOpen] = useState(false);
@@ -19,8 +22,24 @@ export default function Header() {
     };
 
 
+
+    let goToAll = () => {
+        navigate("/all-cars")
+    }
+
+    let goHome = () => {
+        navigate("/")
+    }
+
+
+    let goAdd = () => {
+        navigate("/add-car")
+    }
+
+
+
     return (
-        <header>
+        <header className='mb-8'>
             <nav
                 className="relative flex w-full items-center justify-between  py-2  shadow-lg md:flex-wrap md:justify-start"
                 data-te-navbar-ref>
@@ -67,10 +86,9 @@ export default function Header() {
                         // }
                         >
                             <div className=' w-full p-5 flex flex-col justify-center items-center text-lg h-full gap-4'>
-                                <p className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>allCars</p>
-                                <p className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>addCar</p>
-                                <p className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>editCar</p>
-                                <p className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>deleteCar</p>
+                                <p onClick={goHome} className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>home</p>
+                                <p onClick={goToAll} className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>allCars</p>
+                                <p onClick={goAdd} className='w-full text-center p-2 cursor-pointer hover:bg-slate-400'>addCar</p>
                             </div>
                         </Drawer>
                     </div>
@@ -81,51 +99,41 @@ export default function Header() {
                         id="navbarSupportedContentY"
                         data-te-collapse-item>
                         <ul
-                            className="mr-auto flex flex-col lg:flex-row"
+                            className="mr-auto flex flex-col lg:flex-row "
                             data-te-navbar-nav-ref>
                             <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                                <a
-                                    className="block transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
-                                    href="#!"
+                                <p onClick={goHome}
+                                    className="block cursor-pointer transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
+
                                     data-te-nav-link-ref
                                     data-te-ripple-init
                                     data-te-ripple-color="light"
-                                >allCars</a>
+                                >home</p>
+                            </li>
+                            <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+                                <p onClick={goToAll}
+                                    className="block cursor-pointer transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
+
+                                    data-te-nav-link-ref
+                                    data-te-ripple-init
+                                    data-te-ripple-color="light"
+                                >allCars</p>
                             </li>
 
                             <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                                <a
-                                    className="block transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
-                                    href="#!"
+                                <p onClick={goAdd}
+                                    className="block cursor-pointer transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
+
                                     data-te-nav-link-ref
                                     data-te-ripple-init
                                     data-te-ripple-color="light"
-                                >addCar</a>
+                                >addCar</p>
                             </li>
-                            <li className="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                                <a
-                                    className="block transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
-                                    href="#!"
-                                    data-te-nav-link-ref
-                                    data-te-ripple-init
-                                    data-te-ripple-color="light"
-                                >editCar</a>
-                            </li>
-                            <li className="mb-2 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-                                <a
-                                    className="block transition duration-150 ease-in-out  lg:p-2 [&.active]:text-black/90"
-                                    href="#!"
-                                    data-te-nav-link-ref
-                                    data-te-ripple-init
-                                    data-te-ripple-color="light"
-                                >deleteCar</a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
             </nav>
-
-
         </header>
     )
 }
