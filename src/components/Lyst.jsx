@@ -3,7 +3,7 @@ import { Context } from '../context/Context';
 import React, { useState, useEffect, useContext } from 'react';
 import Header from './Header';
 import { useNavigate } from 'react-router-dom';
-
+import Data from '../services/Api';
 
 
 export default function Lyst({ setSelectedCar }) {
@@ -22,9 +22,15 @@ export default function Lyst({ setSelectedCar }) {
     }
 
 
-    let deleteCar = (element) => {
 
-        // let x = data.filter(e => e.id == element.target.value);
+    let api = new Data();
+
+    let deleteCar = async (element) => {
+        console.log(element.target.value);
+        await api.deleteCar(element.target.value)
+
+        let x = data.filter(e => e.id != element.target.value);
+        setData(x);
 
     }
 
