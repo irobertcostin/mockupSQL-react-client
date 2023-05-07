@@ -5,7 +5,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { DatePicker, Button, Form, Input, InputNumber, message } from 'antd';
 import Data from "../services/Api";
 
+
+
+
 export default function EditCar() {
+
+    const navigate = useNavigate();
 
     let [data, setData] = useContext(Context);
 
@@ -55,27 +60,38 @@ export default function EditCar() {
 
     let newCar = async () => {
 
-        let newC = {
-            id: +id,
-            maker: brand,
-            model: model,
-            year: year,
-            price: price,
-            mileage: mileage
+
+
+        if (brand != "" && model != "" && year != "" && price != "" && mileage != "") {
+            let newC = {
+                id: +id,
+                maker: brand,
+                model: model,
+                year: year,
+                price: price,
+                mileage: mileage
+            }
+
+            await api.editCar(newC, id)
+
+            let x = data.filter(e => e.id != id);
+
+            x.push(newC);
+
+            console.log(x);
+            setData(x);
+        } else {
+            message.error("Check inputs", [5], console.log("object"))
         }
 
-        await api.editCar(newC, id)
 
-        let x = data.filter(e => e.id != id);
 
-        x.push(newC);
-
-        console.log(x);
-        setData(x);
     }
 
 
-
+    let goHome = () => {
+        navigate("/")
+    }
 
 
 
@@ -111,7 +127,7 @@ export default function EditCar() {
                         <p>Car Price: ${editCar.price}</p>
                     </div>
 
-                    <div>
+                    <div className="w-full border-2 border-green-600">
                         <Form className=" add-form flex flex-col  px-12 py-12  w-auto rounded-lg"
                             labelCol={{
                                 span: 0,
@@ -166,10 +182,10 @@ export default function EditCar() {
 
 
 
-                            <div className="flex md:w-[00px]  flex-row gap-4 items-center justify-center mt-2 mr-4">
+                            <div className="flex md:w-[300px]  flex-row gap-4 items-center justify-center mt-2 mr-4">
                                 <Button type="primary" onClick={newCar} className="bg-blue-600 text-shadow-glow hover:scale-110">Submit</Button>
                                 <Button type="primary" danger className="bg-blue-600 text-shadow-glow hover:scale-110">Delete</Button>
-                                <Button type="primary" className=" text-shadow-glow hover:scale-110" danger>Cancel</Button>
+                                <Button type="primary" onClick={goHome} className=" text-shadow-glow hover:scale-110" danger>Cancel</Button>
                             </div>
 
 

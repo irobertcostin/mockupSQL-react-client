@@ -31,7 +31,7 @@ export default class Data {
                 return resp;
             } else {
                 let resp = await data.json();
-
+                alert(resp);
                 message.error(resp.error.message, [3], console.log(""))
             }
 
@@ -64,6 +64,61 @@ export default class Data {
             message.error(error, [3], console.log(error))
         }
     }
+
+
+
+    async addCar(car) {
+
+        try {
+
+            let data = await this.api("/add", "POST", car)
+
+
+            if (data.status === 204) {
+                let resp = await data.json();
+                console.log(resp);
+
+            } else {
+                let resp = await data.json();
+
+                message.error(resp.error.message, [3], console.log(""))
+            }
+
+
+        } catch (error) {
+            message.error(error, [3], console.log(error))
+        }
+
+    }
+
+
+    async deleteCar(id) {
+
+        try {
+
+            let data = await this.api(`/delete/id=${id}`, "DELETE")
+
+
+            if (data.status === 202) {
+                let resp = await data.json();
+                console.log(resp);
+                message.success(resp, [3], console.log(""))
+
+            } else {
+                let resp = await data.json();
+
+                message.error(resp.error.message, [3], console.log(""))
+            }
+
+
+        } catch (error) {
+            message.error(error, [3], console.log(error))
+        }
+
+    }
+
+
+
 
 
 
